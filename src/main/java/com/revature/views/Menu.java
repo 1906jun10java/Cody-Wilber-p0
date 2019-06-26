@@ -3,14 +3,12 @@ package com.revature.views;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Menu {
-	Scanner sc = new Scanner(System.in);
-	ArrayList<String> menuItems;
-	
+public abstract class Menu {
+	protected Scanner sc = new Scanner(System.in);
+	protected ArrayList<String> menuItems;
+
 	// Constructor
-	public Menu(ArrayList<String> menuItems) {
-		this.menuItems = menuItems;
-	}
+	public Menu() {}
 	
 	// Display the menu and return selection
 	public int display() {
@@ -43,5 +41,13 @@ public class Menu {
 		}
 		
 		return option;
+	}
+	
+	public ArrayList<String> getMenuItems() {
+		return menuItems;
+	}
+
+	public void setMenuItems(ArrayList<String> menuItems) {
+		this.menuItems = menuItems;
 	}
 }
