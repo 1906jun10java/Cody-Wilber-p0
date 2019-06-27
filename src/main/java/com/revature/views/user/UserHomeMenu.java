@@ -11,4 +11,20 @@ public class UserHomeMenu extends Menu {
 		this.menuItems.add("Login");
 		this.menuItems.add("Register");
 	}
+
+	@Override
+	public void getResponse(int option) {
+		switch (option) {
+		case 0:
+			return;
+		case 1:
+			System.out.println("Do Login");
+			break;
+		case 2:
+			System.out.println("Do Registration");
+			break;
+		default:
+			break;
+		}
+	}
 }

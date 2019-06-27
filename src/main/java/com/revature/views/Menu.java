@@ -43,6 +43,9 @@ public abstract class Menu {
 		return option;
 	}
 	
+	// Retrieve user response from menu
+	public abstract void getResponse(int option);
+	
 	public ArrayList<String> getMenuItems() {
 		return menuItems;
 	}

@@ -8,17 +8,6 @@ public class Driver {
 		
 		// Display home menu
 		UserHomeMenu uhm = new UserHomeMenu();
-		switch (uhm.display()) {
-		case 0:
-			return;
-		case 1:
-			System.out.println("Do Login");
-			break;
-		case 2:
-			System.out.println("Do Registration");
-			break;
-		default:
-			break;
-		}
+		uhm.getResponse(uhm.display());
 	}
 }
