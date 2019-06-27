@@ -1,31 +1,34 @@
 package com.revature.beans;
 
-public class Customer {
-	private int custId;
-	private String password;
-	private String firstName;
-	private String lastName;
-	private String email;
+public class Customer extends User{
 	
 	public Customer() {
 		super();
 	}
 
-	public Customer(int custId, String password, String firstName, String lastName, String email) {
-		super();
-		this.custId = custId;
+	public Customer(int ID, String login, String password, String firstName, String lastName) {
+		this();
+		this.ID = ID;
+		this.login = login;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.email = email;
 	}
 
 	public int getCustId() {
-		return custId;
+		return ID;
 	}
 
-	public void setCustId(int custId) {
-		this.custId = custId;
+	public void setCustId(int ID) {
+		this.ID = ID;
+	}
+	
+	public String getLogin() {
+		return login;
+	}
+	
+	public void setLogin(String login) {
+		this.login = login;
 	}
 
 	public String getPassword() {
@@ -52,18 +55,10 @@ public class Customer {
 		this.lastName = lastName;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	@Override
 	public String toString() {
-		return "Customer [custId=" + custId + ", password=" + password + ", firstName=" + firstName + ", lastName="
-				+ lastName + ", email=" + email + "]";
+		return "Customer [ID=" + ID + ", login=" + login + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + "]";
 	}
 
 	
