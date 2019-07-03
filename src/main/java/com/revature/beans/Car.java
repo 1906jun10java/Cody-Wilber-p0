@@ -13,6 +13,7 @@ public class Car implements Serializable {
 	private String model;
 	private Integer mileage;
 	private BigDecimal price;
+	private BigDecimal balance;
 	private Integer ownerId;
 	
 	public Car(Integer year, String make, String model, Integer mileage,
@@ -26,6 +27,7 @@ public class Car implements Serializable {
 		this.model = model;
 		this.mileage = mileage;
 		this.price = price;
+		this.balance = price;
 		this.ownerId = null;
 	}
 	
@@ -64,6 +66,12 @@ public class Car implements Serializable {
 	}
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+	public BigDecimal getBalance() {
+		return balance;
+	}
+	public void setBalance(BigDecimal balance) {
+		this.balance = balance;
 	}
 	public Integer getOwnerId() {
 		return ownerId;

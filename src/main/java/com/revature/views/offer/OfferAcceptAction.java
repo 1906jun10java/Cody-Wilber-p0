@@ -14,18 +14,20 @@ public class OfferAcceptAction {
 	
 	public void run() {
 		Integer offerId = os.getOfferIdInput();
+		Offer offer = os.getOffer(offerId);
 		
 		os.acceptOffer(offerId);
 		
 		// Assign car to customer
 		Car c = cs.getCar(os.getOffer(offerId).getCarId());
 		c.setOwnerId(os.getOffer(offerId).getCustomerId());
+		c.setPrice(offer.getAmount());
 		cs.updateCar(c);
 		
 		// Reject other offers for same car
 		ArrayList<Offer> carOffers = os.getOffersByCar(c.getId());
 		for (Offer o : carOffers) {
-			if (o.getId() != offerId) {
+			if (o.getId().equals(offerId)) {
 				os.rejectOffer(o.getId());
 			}
 		}

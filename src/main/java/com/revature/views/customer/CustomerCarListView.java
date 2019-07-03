@@ -19,12 +19,13 @@ public class CustomerCarListView {
 		ArrayList<Car> cars = cs.getCustomerCars(customer.getId());
 		System.out.println();
 		for (Car c : cars) {
-			System.out.println("ID:\t\t" + c.getId());
+			System.out.println("ID:\t\t\t" + c.getId());
 			System.out.println("Year:\t\t" + c.getYear());
 			System.out.println("Make:\t\t" + c.getMake());
 			System.out.println("Model:\t\t" + c.getModel());
 			System.out.println("Mileage:\t" + c.getMileage());
 			System.out.println("Price:\t\t$" + c.getPrice().setScale(2));
+			System.out.println("Balance:\t$" + c.getBalance().setScale(2));
 			System.out.println();
 		}
 	}

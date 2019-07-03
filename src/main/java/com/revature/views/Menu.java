@@ -1,6 +1,7 @@
 package com.revature.views;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public abstract class Menu {
@@ -26,16 +27,21 @@ public abstract class Menu {
 			System.out.print(">>> ");
 			
 			// Get input
-			if (sc.hasNext()) {
-				option = sc.nextInt();
-				sc.nextLine();
-				if (option < 0 || option >= this.menuItems.size()) {
+			try {
+				if (sc.hasNext()) {
+					option = sc.nextInt();
+					sc.nextLine();
+					if (option < 0 || option >= this.menuItems.size()) {
+						System.out.println("Invalid option");
+						continue;
+					}
+					notValid = false;
+				} else {
 					System.out.println("Invalid option");
-					continue;
+					sc.nextLine();
 				}
-				notValid = false;
-			} else {
-				System.out.println("Invalid option");
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid option.");
 				sc.nextLine();
 			}
 		}

@@ -16,6 +16,7 @@ public class CustomerPaymentMenu extends Menu {
 	public void redirect(int option) {
 		CustomerPaymentMenu cpm = new CustomerPaymentMenu();
 		CustomerHomeMenu chm = new CustomerHomeMenu();
+		CustomerPaymentAction cpa = new CustomerPaymentAction();
 		
 		switch (option) {
 		case 0:
@@ -26,7 +27,7 @@ public class CustomerPaymentMenu extends Menu {
 			cpm.redirect(cpm.display());
 			break;
 		case 2:
-			System.out.println("Do Make a Payment");
+			cpa.run();
 			cpm.redirect(cpm.display());
 			break;
 		default:
