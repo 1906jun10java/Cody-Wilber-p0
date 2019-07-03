@@ -44,7 +44,7 @@ public abstract class Menu {
 	}
 	
 	// Retrieve user response from menu
-	public abstract void getResponse(int option);
+	public abstract void redirect(int option);
 	
 	public ArrayList<String> getMenuItems() {
 		return menuItems;

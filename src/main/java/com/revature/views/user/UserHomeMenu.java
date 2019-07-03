@@ -13,15 +13,19 @@ public class UserHomeMenu extends Menu {
 	}
 
 	@Override
-	public void getResponse(int option) {
+	public void redirect(int option) {
+		UserLoginMenu ulm = new UserLoginMenu();
+		UserRegisterMenu urm = new UserRegisterMenu();
+		
 		switch (option) {
 		case 0:
-			return;
+			System.out.println("\nGoodbye.");
+			System.exit(0);
 		case 1:
-			System.out.println("Do Login");
+			ulm.redirect(ulm.display());
 			break;
 		case 2:
-			System.out.println("Do Registration");
+			urm.redirect(urm.display());
 			break;
 		default:
 			break;
