@@ -18,7 +18,8 @@ public class UserHomeMenu extends Menu {
 		case 0:
 			return;
 		case 1:
-			System.out.println("Do Login");
+			UserLoginMenu ulm = new UserLoginMenu();
+			ulm.getResponse(ulm.display());
 			break;
 		case 2:
 			System.out.println("Do Registration");
