@@ -33,7 +33,7 @@ public class EmployeeRegisterAction {
 	}
 	
 	// Get username from user
-	public String getUsername() {
+	private String getUsername() {
 		String username = "";
 		
 		boolean notValidUsername = true;
@@ -50,7 +50,7 @@ public class EmployeeRegisterAction {
 	}
 	
 	// Get password from user
-	public String getPassword() {
+	private String getPassword() {
 		String password = "";
 		
 		boolean notValidPassword = true;
@@ -76,7 +76,7 @@ public class EmployeeRegisterAction {
 	}
 	
 	// Validate username
-	public boolean validateUsername(String un) {
+	private boolean validateUsername(String un) {
 		if (un.length() < 6) {
 			System.out.println("Username must be at least 6 characters.");
 			return false;
@@ -93,7 +93,7 @@ public class EmployeeRegisterAction {
 	}
 	
 	// Validate password
-	public boolean validatePassword(String pw) {
+	private boolean validatePassword(String pw) {
 		if (pw.length() < 6) {
 			System.out.println("Password must be at least 6 characters.");
 			return false;
