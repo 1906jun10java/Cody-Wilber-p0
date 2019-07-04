@@ -27,7 +27,7 @@ public class CarAddAction {
 	
 	// Get vehicle year
 	private Integer getYearInput() {
-		Integer year = 0;
+		int year = 0;
 		while (true) {
 			System.out.println("Enter vehicle's year:");
 			System.out.print(">>> ");
@@ -66,7 +66,7 @@ public class CarAddAction {
 	
 	// Get vehicle mileage from user
 	private Integer getMileageInput() {
-		Integer mileage = 0;
+		int mileage = 0;
 		while (true) {
 			System.out.println("Enter vehicle's mileage:");
 			System.out.print(">>> ");
