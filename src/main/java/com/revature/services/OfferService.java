@@ -39,9 +39,7 @@ public class OfferService {
 			fis.close();
 		} catch (FileNotFoundException e) {
 			// e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -54,8 +52,6 @@ public class OfferService {
 			oos.writeObject(offers);
 			oos.close();
 			fos.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -76,7 +72,7 @@ public class OfferService {
 	public void updateOffer(Offer o) {
 		ListIterator<Offer> it = offers.listIterator();
 		while (it.hasNext()) {
-			if (it.next().getId() == o.getId()) {
+			if (it.next().getId().equals(o.getId())) {
 				it.remove();
 				it.add(o);
 				saveOffers();
@@ -101,7 +97,7 @@ public class OfferService {
 		
 		ListIterator<Offer> it = offers.listIterator();
 		while (it.hasNext()) {
-			if (it.next().getCarId() == carId) {
+			if (it.next().getCarId().equals(carId)) {
 				offers.add(it.next());
 			}
 		}
