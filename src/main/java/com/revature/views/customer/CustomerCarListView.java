@@ -12,7 +12,7 @@ public class CustomerCarListView {
 	private static CustomerService cus = CustomerService.getInstance();
 	private static CarService cs = CarService.getInstance();
 	
-	public CustomerCarListView() {}
+	CustomerCarListView() {}
 	
 	public void display() {
 		Customer customer = cus.getCurrentCustomer();

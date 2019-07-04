@@ -8,7 +8,7 @@ import com.revature.views.offer.OfferCreateAction;
 import com.revature.views.user.UserHomeMenu;
 
  public class CustomerHomeMenu extends Menu {
-	public CustomerHomeMenu() {
+	CustomerHomeMenu() {
 		this.menuItems = new ArrayList<String>();
 		this.menuItems.add("Logout");
 		this.menuItems.add("View Available Cars");

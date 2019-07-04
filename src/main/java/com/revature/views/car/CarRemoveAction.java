@@ -5,7 +5,7 @@ import com.revature.services.CarService;
 public class CarRemoveAction {
 	private static CarService cs = CarService.getInstance();
 	
-	public CarRemoveAction() {}
+	CarRemoveAction() {}
 	
 	public void run() {
 		Integer carId = cs.getCarIdInput();

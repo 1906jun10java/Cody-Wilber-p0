@@ -18,7 +18,7 @@ public class CustomerPaymentAction {
     private static PaymentService ps = PaymentService.getInstance();
     private static Scanner sc = new Scanner(System.in);
 
-    public CustomerPaymentAction() {}
+    CustomerPaymentAction() {}
 
     public void run() {
         Integer carId = cs.getCarIdInput();

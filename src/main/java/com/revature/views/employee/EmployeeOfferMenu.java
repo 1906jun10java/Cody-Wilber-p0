@@ -8,7 +8,7 @@ import com.revature.views.offer.OfferListView;
 import com.revature.views.offer.OfferRejectAction;
 
 public class EmployeeOfferMenu extends Menu {
-	public EmployeeOfferMenu() {
+	EmployeeOfferMenu() {
 		this.menuItems = new ArrayList<String>();
 		this.menuItems.add("Back");
 		this.menuItems.add("View Offers");

@@ -11,7 +11,7 @@ public class CarAddAction {
 	private static CarService cs = CarService.getInstance();
 	private static Scanner sc = new Scanner(System.in);
 	
-	public CarAddAction() {}
+	CarAddAction() {}
 	
 	public void run() {
 		Integer year = getYearInput();

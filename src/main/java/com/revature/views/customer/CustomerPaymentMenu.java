@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import com.revature.views.Menu;
 
 public class CustomerPaymentMenu extends Menu {
-	public CustomerPaymentMenu() {
+	CustomerPaymentMenu() {
 		this.menuItems = new ArrayList<String>();
 		this.menuItems.add("Back");
 		this.menuItems.add("Display Payments");

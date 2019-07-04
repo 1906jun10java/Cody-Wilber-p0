@@ -7,7 +7,7 @@ import com.revature.views.customer.CustomerLoginAction;
 import com.revature.views.employee.EmployeeLoginAction;
 
  public class UserLoginMenu extends Menu {
-	public UserLoginMenu() {
+	UserLoginMenu() {
 		this.menuItems = new ArrayList<String>();
 		this.menuItems.add("Back");
 		this.menuItems.add("Customer");

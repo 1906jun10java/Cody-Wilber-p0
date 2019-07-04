@@ -7,7 +7,7 @@ import com.revature.views.customer.CustomerRegisterAction;
 import com.revature.views.employee.EmployeeRegisterAction;
 
 public class UserRegisterMenu extends Menu {
-	public UserRegisterMenu() {
+	UserRegisterMenu() {
 		this.menuItems = new ArrayList<String>();
 		this.menuItems.add("Back");
 		this.menuItems.add("Customer");
