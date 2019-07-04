@@ -117,4 +117,12 @@ public class PaymentService {
 		c.setBalance(carBalance);
 		cs.updateCar(c);
 	}
+
+	// Print out payment
+	public void printPayment(Payment p) {
+		Car c = cs.getCar(p.getCarId());
+		System.out.println("\nPayment " + p.getId() + ":");
+		System.out.println(c.getYear() + " " + c.getMake() + " " + c.getModel());
+		System.out.println("Paid $" + p.getAmount());
+	}
 }

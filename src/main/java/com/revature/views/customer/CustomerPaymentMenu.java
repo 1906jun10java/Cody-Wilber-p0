@@ -17,13 +17,14 @@ public class CustomerPaymentMenu extends Menu {
 		CustomerPaymentMenu cpm = new CustomerPaymentMenu();
 		CustomerHomeMenu chm = new CustomerHomeMenu();
 		CustomerPaymentAction cpa = new CustomerPaymentAction();
+		CustomerPaymentListView cplv = new CustomerPaymentListView();
 		
 		switch (option) {
 		case 0:
 			chm.redirect(chm.display());
 			break;
 		case 1:
-			System.out.println("Do Display Payments");
+			cplv.display();
 			cpm.redirect(cpm.display());
 			break;
 		case 2:

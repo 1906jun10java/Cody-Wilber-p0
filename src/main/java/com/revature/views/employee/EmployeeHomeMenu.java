@@ -24,6 +24,7 @@ public class EmployeeHomeMenu extends Menu {
 		UserHomeMenu uhm = new UserHomeMenu();
 		CarEditMenu cem = new CarEditMenu();
 		EmployeeOfferMenu eom = new EmployeeOfferMenu();
+		EmployeePaymentListView eplv = new EmployeePaymentListView();
 		
 		switch (option) {
 		case 0:
@@ -42,7 +43,7 @@ public class EmployeeHomeMenu extends Menu {
 			ehm.redirect(ehm.display());
 			break;
 		case 4:
-			System.out.println("Do View Customer Payments");
+			eplv.display();
 			ehm.redirect(ehm.display());
 			break;
 		default:
