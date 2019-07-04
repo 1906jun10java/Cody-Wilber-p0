@@ -36,9 +36,7 @@ public class EmployeeService {
 			fis.close();
 		} catch (FileNotFoundException e) {
 			// e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -51,8 +49,6 @@ public class EmployeeService {
 			oos.writeObject(employees);
 			oos.close();
 			fos.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
