@@ -6,9 +6,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.revature.beans.Customer;
+import com.revature.dao.CustomerDAOImpl;
 
 public class CustomerService {
 	private static CustomerService instance;
@@ -71,17 +73,32 @@ public class CustomerService {
 	
 	// Save customer to customers
 	public void saveCustomer(Customer c) {
-		customers.add(c);
-		saveCustomers();
+		/*customers.add(c);
+		saveCustomers();*/
+		CustomerDAOImpl cdi = new CustomerDAOImpl();
+		try {
+			cdi.saveCustomer(c);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	// Get customer from customers
 	public Customer getCustomer(String username) {
-		for (Customer c : customers) {
+		/*for (Customer c : customers) {
 			if (c.getUsername().equals(username)) {
 				return c;
 			}
 		}
+		return null;*/
+		CustomerDAOImpl cdi = new CustomerDAOImpl();
+		try {
+			Customer c = cdi.getCustomer(username);
+			return c;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
 		return null;
 	}
 }

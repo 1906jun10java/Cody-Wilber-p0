@@ -11,7 +11,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     private Connection connection = cs.getConnection();
 
     @Override
-    public void addCustomer(Customer c) throws SQLException {
+    public void saveCustomer(Customer c) throws SQLException {
         String sql = "{ call INSERT_CUSTOMER(?,?,?,?)";
         CallableStatement stmt = connection.prepareCall(sql);
         stmt.setString(1, c.getFirstName());
@@ -22,26 +22,24 @@ public class CustomerDAOImpl implements CustomerDAO {
     }
 
     @Override
-    public ArrayList<Customer> getCustomers() throws SQLException {
-        String sql = "SELECT * FROM CUSTOMER";
-        Statement stmt = connection.createStatement();
+    public Customer getCustomer(String username) throws SQLException {
+        String sql = "SELECT * FROM CUSTOMER WHERE CUSTOMER_USERNAME = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, username);
 
-        ArrayList<Customer> al = new ArrayList<Customer>();
-        ResultSet rs = stmt.executeQuery(sql);
+        ResultSet rs = stmt.executeQuery();
+        Customer c = null;
         if (!rs.isBeforeFirst()) {
             return null;
         }
         while (rs.next()) {
-            Customer c = new Customer(
-                    rs.getString("CUSTOMER_FIRST_NAME"),
-                    rs.getString("CUSTOMER_LAST_NAME"),
-                    rs.getString("CUSTOMER_USERNAME"),
-                    rs.getString("CUSTOMER_PASSWORD")
-            );
             c.setId(rs.getInt("CUSTOMER_ID"));
-            al.add(c);
+            c.setFirstName(rs.getString("CUSTOMER_FIRST_NAME"));
+            c.setLastName(rs.getString("CUSTOMER_LAST_NAME"));
+            c.setUsername(rs.getString("CUSTOMER_USERNAME"));
+            c.setPassword(rs.getString("CUSTOMER_PASSWORD"));
         }
 
-        return al;
+        return c;
     }
 }

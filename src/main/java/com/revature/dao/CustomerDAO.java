@@ -6,6 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface CustomerDAO {
-    void addCustomer(Customer c) throws SQLException;
-    ArrayList<Customer> getCustomers() throws SQLException;
+    void saveCustomer(Customer c) throws SQLException;
+    Customer getCustomer(String username) throws SQLException;
 }
