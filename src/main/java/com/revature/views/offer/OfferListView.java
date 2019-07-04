@@ -1,5 +1,6 @@
 package com.revature.views.offer;
 
+import java.math.RoundingMode;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -22,7 +23,8 @@ public class OfferListView {
 			if (o.getCarId().equals(carId)) {
 				System.out.println("Offer:\t\t" + o.getId());
 				System.out.println("Customer:\t" + o.getCustomerId());
-				System.out.println("Amount:\t\t$" + o.getAmount().setScale(2));
+				System.out.println("Amount:\t\t$" +
+					o.getAmount().setScale(2, RoundingMode.HALF_UP));
 				System.out.println("Status:\t\t" + o.getStatus());
 				System.out.println();
 			}
