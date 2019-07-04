@@ -1,9 +1,6 @@
 package com.revature.driver;
 
-import com.revature.services.CarService;
-import com.revature.services.CustomerService;
-import com.revature.services.EmployeeService;
-import com.revature.services.OfferService;
+import com.revature.services.*;
 import com.revature.views.user.UserHomeMenu;
 
 public class Driver {	
@@ -13,12 +10,14 @@ public class Driver {
 		EmployeeService employeeService = EmployeeService.getInstance();
 		CarService carService = CarService.getInstance();
 		OfferService offerService = OfferService.getInstance();
+		PaymentService paymentService = PaymentService.getInstance();
 		
 		// Load data
 		customerService.loadCustomers();
 		employeeService.loadEmployees();
 		carService.loadCars();
 		offerService.loadOffers();
+		paymentService.loadPayments();
 		
 		// Display home menu
 		UserHomeMenu uhm = new UserHomeMenu();
