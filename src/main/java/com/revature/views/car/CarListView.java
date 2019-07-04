@@ -3,6 +3,8 @@ package com.revature.views.car;
 import com.revature.beans.Car;
 import com.revature.services.CarService;
 
+import java.math.RoundingMode;
+
 public class CarListView {
 	private static CarService cs = CarService.getInstance();
 	
@@ -18,7 +20,8 @@ public class CarListView {
 				System.out.println("Make:\t\t" + c.getMake());
 				System.out.println("Model:\t\t" + c.getModel());
 				System.out.println("Mileage:\t" + c.getMileage());
-				System.out.println("Price:\t\t$" + c.getPrice().setScale(2));
+				System.out.println("Price:\t\t$" +
+					c.getPrice().setScale(2, RoundingMode.HALF_UP));
 				System.out.println();
 				count++;
 			}
