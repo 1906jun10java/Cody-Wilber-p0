@@ -11,12 +11,10 @@ public abstract class User implements Serializable {
 	private String lastName;
 	private String username;
 	private String password;
+
+	public User() {}
 	
 	public User(String fn, String ln, String un, String pw) {
-		// Generate a random id
-		Random r = new Random();
-		this.id = 100000000 + r.nextInt(900000000);
-		
 		this.firstName = fn;
 		this.lastName = ln;
 		this.username = un;

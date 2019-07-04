@@ -28,7 +28,7 @@ public class CustomerDAOImpl implements CustomerDAO {
         stmt.setString(1, username);
 
         ResultSet rs = stmt.executeQuery();
-        Customer c = null;
+        Customer c = new Customer();
         if (!rs.isBeforeFirst()) {
             return null;
         }
