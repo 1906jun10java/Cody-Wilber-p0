@@ -17,7 +17,7 @@ public class CarEditAction {
 		Integer carId = cs.getCarIdInput();
 		
 		Car c = cs.getCar(carId);
-		Integer option = null;
+		int option = 0;
 		if (c != null) {
 			System.out.println("\nWhich component to edit?");
 			System.out.println("0. Back");
@@ -62,7 +62,7 @@ public class CarEditAction {
 	
 	// Get vehicle year
 	private Integer getYearInput() {
-		Integer year = 0;
+		int year = 0;
 		while (true) {
 			System.out.println("Enter vehicle's year:");
 			System.out.print(">>> ");
@@ -101,7 +101,7 @@ public class CarEditAction {
 	
 	// Get vehicle mileage from user
 	private Integer getMileageInput() {
-		Integer mileage = 0;
+		int mileage = 0;
 		while (true) {
 			System.out.println("Enter vehicle's mileage:");
 			System.out.print(">>> ");
