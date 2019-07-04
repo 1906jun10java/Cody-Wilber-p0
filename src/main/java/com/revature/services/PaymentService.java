@@ -48,9 +48,7 @@ public class PaymentService {
 			fis.close();
 		} catch (FileNotFoundException e) {
 			// e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -63,8 +61,6 @@ public class PaymentService {
 			oos.writeObject(payments);
 			oos.close();
 			fos.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
