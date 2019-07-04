@@ -39,9 +39,7 @@ public class CarService {
 			fis.close();
 		} catch (FileNotFoundException e) {
 			// e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (ClassNotFoundException | IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -54,8 +52,6 @@ public class CarService {
 			oos.writeObject(cars);
 			oos.close();
 			fos.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -121,7 +117,7 @@ public class CarService {
 	
 	// Get car id from user
 	public Integer getCarIdInput() {
-		Integer id = 0;
+		int id = 0;
 		while (true) {
 			System.out.println("Enter vehicle's ID:");
 			System.out.print(">>> ");
