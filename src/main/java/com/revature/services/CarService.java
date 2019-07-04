@@ -85,7 +85,6 @@ public class CarService {
 	// Get cars owned by a customer
 	public ArrayList<Car> getCustomerCars(Integer customerId) {
 		ArrayList<Car> customerCars = new ArrayList<Car>();
-		
 		for (Car c : cars) {
 			if (c.getOwnerId().equals(customerId)) {
 				customerCars.add(c);

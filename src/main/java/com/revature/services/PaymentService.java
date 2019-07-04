@@ -19,7 +19,13 @@ public class PaymentService {
 	private static PaymentService instance;
 	private static ArrayList<Payment> payments = new ArrayList<Payment>();
 	private static Scanner sc = new Scanner(System.in);
-	private final BigDecimal TERM = BigDecimal.valueOf(48);
+	private static CarService cs = CarService.getInstance();
+	private final BigDecimal TERM12 = BigDecimal.valueOf(12);
+	private final BigDecimal TERM24 = BigDecimal.valueOf(24);
+	private final BigDecimal TERM36 = BigDecimal.valueOf(36);
+	private final BigDecimal TERM48 = BigDecimal.valueOf(48);
+	private final BigDecimal TERM60 = BigDecimal.valueOf(60);
+	private final BigDecimal TERM72 = BigDecimal.valueOf(72);
 	
 	private PaymentService() {}
 	
@@ -68,15 +74,12 @@ public class PaymentService {
 	public void addPayment(Payment p) {
 		payments.add(p);
 		savePayments();
-
 	}
 
 	// Get car payments
 	public ArrayList<Payment> getPayments(Car c) {
 		ArrayList<Payment> carPayments = new ArrayList<Payment>();
-		ListIterator<Payment> it = payments.listIterator();
-		while (it.hasNext()) {
-			Payment p = it.next();
+		for (Payment p : payments) {
 			if (p.getCarId().equals(c.getId())) {
 				carPayments.add(p);
 			}
@@ -85,13 +88,26 @@ public class PaymentService {
 		return carPayments;
 	}
 
-	// Calculate monthly payments
+	// Calculate monthly payments depending on car price
 	public BigDecimal calcMonthlyPayment(Car c) {
-		return c.getPrice().divide(TERM, 2, RoundingMode.HALF_UP);
+		BigDecimal carPrice = c.getPrice();
+		if (carPrice.compareTo(BigDecimal.valueOf(1000)) < 0) {
+			return carPrice.divide(TERM12, 2, RoundingMode.HALF_UP);
+		} else if (carPrice.compareTo(BigDecimal.valueOf(2000)) < 0) {
+			return carPrice.divide(TERM24, 2, RoundingMode.HALF_UP);
+		} else if (carPrice.compareTo(BigDecimal.valueOf(5000)) < 0) {
+			return carPrice.divide(TERM36, 2, RoundingMode.HALF_UP);
+		} else if (carPrice.compareTo(BigDecimal.valueOf(8500)) < 0) {
+			return carPrice.divide(TERM48, 2, RoundingMode.HALF_UP);
+		} else if (carPrice.compareTo(BigDecimal.valueOf(12000)) < 0) {
+			return carPrice.divide(TERM60, 2, RoundingMode.HALF_UP);
+		} else {
+			return carPrice.divide(TERM72, 2, RoundingMode.HALF_UP);
+		}
 	}
 
 	// Update balance of car
-	public BigDecimal getNewCarBalance(Car c) {
+	public void updateCarBalance(Car c) {
 		ArrayList<Payment> carPayments = getPayments(c);
 		BigDecimal monthlyPayment = calcMonthlyPayment(c);
 		BigDecimal carBalance = c.getPrice();
@@ -99,7 +115,10 @@ public class PaymentService {
 		for (Payment p : carPayments) {
 			carBalance = carBalance.subtract(p.getAmount());
 		}
-
-		return carBalance;
+		if (carBalance.compareTo(BigDecimal.ZERO) < 0) {
+			carBalance = BigDecimal.valueOf(0.00);
+		}
+		c.setBalance(carBalance);
+		cs.updateCar(c);
 	}
 }

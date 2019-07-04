@@ -22,7 +22,7 @@ public class OfferAcceptAction {
 		Car c = cs.getCar(os.getOffer(offerId).getCarId());
 		c.setOwnerId(os.getOffer(offerId).getCustomerId());
 		c.setPrice(offer.getAmount());
-		cs.updateCar(c);
+		c.setBalance(offer.getAmount());
 		
 		// Reject other offers for same car
 		ArrayList<Offer> carOffers = os.getOffersByCar(c.getId());

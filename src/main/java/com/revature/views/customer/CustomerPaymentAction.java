@@ -5,8 +5,10 @@ import com.revature.beans.Payment;
 import com.revature.services.CarService;
 import com.revature.services.CustomerService;
 import com.revature.services.PaymentService;
+import org.apache.logging.log4j.core.config.plugins.convert.TypeConverters;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -21,20 +23,25 @@ public class CustomerPaymentAction {
     public void run() {
         Integer carId = cs.getCarIdInput();
         Car c = cs.getCar(carId);
+        System.out.println(c.getId() + " " + carId);
         BigDecimal monthlyPayment = ps.calcMonthlyPayment(c);
 
-        System.out.println("\nYour monthly payment is " + monthlyPayment);
+        System.out.println("\nYour monthly payment is $" + monthlyPayment);
         System.out.println("Would you like to make a payment?");
         System.out.println("0. No");
         System.out.println("1. Yes");
-        System.out.println(">>> ");
+        System.out.print(">>> ");
         Integer option = null;
         try {
             option = sc.nextInt();
             sc.nextLine();
         } catch (InputMismatchException e) {
-            System.out.println("Invalid input.");
+            System.out.println("\nInvalid option.");
             sc.nextLine();
+        }
+        if (option == null) {
+            System.out.println("\nInvalid option.");
+            return;
         }
 
         switch (option) {
@@ -45,11 +52,10 @@ public class CustomerPaymentAction {
             Integer customerId = cus.getCurrentCustomer().getId();
             Payment p = new Payment(monthlyPayment, customerId, c.getId());
             ps.addPayment(p);
-            BigDecimal newBalance = ps.getNewCarBalance(c);
-            c.setBalance(newBalance);
-            cs.updateCar(c);
+            ps.updateCarBalance(c);
             System.out.println("\nThank you for your payment.");
-            System.out.println("Your new balance is " + newBalance.setScale(2));
+            System.out.println("Your new balance is $" +
+                c.getBalance().setScale(2, RoundingMode.HALF_UP));
             break;
         default:
             System.out.println("\nInvalid option.");

@@ -50,7 +50,7 @@ public class EmployeeLoginAction {
 			if (e.getPassword().equals(pw)) {
 				return e;
 			} else {
-				System.out.println("Invalid credentials.");
+				System.out.println("\nInvalid credentials.");
 				return null;
 			}
 		}
