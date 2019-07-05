@@ -1,21 +1,16 @@
 package com.revature.services;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.ListIterator;
-import java.util.Scanner;
-
 import com.revature.beans.Car;
+import com.revature.dao.CarDAOImpl;
+
+import java.sql.SQLException;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
 
 public class CarService {
 	private static CarService instance;
-	private static ArrayList<Car> cars = new ArrayList<Car>();
+	private static CarDAOImpl cdi = new CarDAOImpl();
 	private static Scanner sc = new Scanner(System.in);
 	
 	private CarService() {}
@@ -28,96 +23,66 @@ public class CarService {
 		return instance;
 	}
 	
-	// Load cars
-	@SuppressWarnings("unchecked")
-	public void loadCars() {
-		try {
-			FileInputStream fis = new FileInputStream("Cars.ser");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			cars = (ArrayList<Car>)ois.readObject();
-			ois.close();
-			fis.close();
-		} catch (FileNotFoundException e) {
-			// e.printStackTrace();
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	// Save cars
-	public void saveCars() {
-		try {
-			FileOutputStream fos = new FileOutputStream("Cars.ser");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(cars);
-			oos.close();
-			fos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	// Get all cars
-	public ArrayList<Car> getCars() {
-		return cars;
-	}
-	
-	// Save car to cars
+	// Save car
 	public void saveCar(Car c) {
-		cars.add(c);
-		saveCars();
+		try {
+			cdi.saveCar(c);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	// Get car from cars
-	public Car getCar(Integer id) {
-		for (Car c : cars) {
-			if (c.getId().equals(id)) {
-				return c;
-			}
+
+	// Get all unowned cars
+	public List<Car> getUnownedCars() {
+		try {
+			return cdi.getUnownedCars();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	// Get cars owned by a customer
-	public ArrayList<Car> getCustomerCars(Integer customerId) {
-		ArrayList<Car> customerCars = new ArrayList<Car>();
-		for (Car c : cars) {
-			if (c.getOwnerId().equals(customerId)) {
-				customerCars.add(c);
-			}
+	// Get car
+	public Car getCar(Integer id) {
+		try {
+			return cdi.getCar(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		return customerCars;
+		return null;
 	}
-	
+
 	// Update car
 	public void updateCar(Car c) {
-		ListIterator<Car> it = cars.listIterator();
-		while (it.hasNext()) {
-			if (it.next().getId().equals(c.getId())) {
-				it.remove();
-				it.add(c);
-				saveCars();
-				break;
-			}
+		try {
+			cdi.updateCar(c);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	// Delete car
+	public void deleteCar(int id) {
+		try {
+			cdi.deleteCar(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 	
-	// Delete car from cars
-	public void deleteCar(Integer id) {
-		ListIterator<Car> it = cars.listIterator();
-		while (it.hasNext()) {
-			if (it.next().getId().equals(id)) {
-				it.remove();
-				saveCars();
-				break;
-			}
+	// Get cars owned by a customer
+	public List<Car> getCustomerCars(Integer customerId) {
+		try {
+			return cdi.getCustomerCars(customerId);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		return null;
 	}
 	
 	// Get car id from user
 	public Integer getCarIdInput() {
-		int id = 0;
+		int id;
 		while (true) {
 			System.out.println("Enter vehicle's ID:");
 			System.out.print(">>> ");

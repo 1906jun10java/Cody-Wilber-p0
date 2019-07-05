@@ -4,6 +4,7 @@ import com.revature.beans.Car;
 import com.revature.services.CarService;
 
 import java.math.RoundingMode;
+import java.util.List;
 
 public class CarListView {
 	private static CarService cs = CarService.getInstance();
@@ -11,24 +12,21 @@ public class CarListView {
 	public CarListView() {}
 	
 	public void display() {
-		int count = 0;
-		System.out.println();
-		for (Car c : cs.getCars()) {
-			if (c.getOwnerId() == null) {
-				System.out.println("ID:\t\t\t" + c.getId());
-				System.out.println("Year:\t\t" + c.getYear());
-				System.out.println("Make:\t\t" + c.getMake());
-				System.out.println("Model:\t\t" + c.getModel());
-				System.out.println("Mileage:\t" + c.getMileage());
-				System.out.println("Price:\t\t$" +
-					c.getPrice().setScale(2, RoundingMode.HALF_UP));
-				System.out.println();
-				count++;
-			}
-		}
-		if (count == 0) {
-			System.out.println("No cars currently on the lot.");
+		List<Car> cars = cs.getUnownedCars();
+		if (cars == null) {
+			System.out.println("\nNo cars currently on the lot.");
 			System.out.println("Come back soon.");
+			return;
+		}
+
+		for (Car c : cs.getUnownedCars()) {
+			System.out.println("\nID:\t\t\t" + c.getId());
+			System.out.println("Year:\t\t" + c.getYear());
+			System.out.println("Make:\t\t" + c.getMake());
+			System.out.println("Model:\t\t" + c.getModel());
+			System.out.println("Mileage:\t" + c.getMileage());
+			System.out.println("Price:\t\t$" +
+				c.getPrice().setScale(2, RoundingMode.HALF_UP));
 		}
 	}
 }

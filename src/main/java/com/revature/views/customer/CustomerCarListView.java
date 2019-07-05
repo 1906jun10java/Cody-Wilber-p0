@@ -1,12 +1,12 @@
 package com.revature.views.customer;
 
-import java.math.RoundingMode;
-import java.util.ArrayList;
-
 import com.revature.beans.Car;
 import com.revature.beans.Customer;
 import com.revature.services.CarService;
 import com.revature.services.CustomerService;
+
+import java.math.RoundingMode;
+import java.util.List;
 
 public class CustomerCarListView {
 	private static CustomerService cus = CustomerService.getInstance();
@@ -17,7 +17,7 @@ public class CustomerCarListView {
 	public void display() {
 		Customer customer = cus.getCurrentCustomer();
 		
-		ArrayList<Car> cars = cs.getCustomerCars(customer.getId());
+		List<Car> cars = cs.getCustomerCars(customer.getId());
 		System.out.println();
 		for (Car c : cars) {
 			System.out.println("ID:\t\t\t" + c.getId());
