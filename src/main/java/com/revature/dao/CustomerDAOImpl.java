@@ -4,7 +4,6 @@ import com.revature.beans.Customer;
 import com.revature.services.ConnectionService;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class CustomerDAOImpl implements CustomerDAO {
     private static ConnectionService cs = ConnectionService.getInstance();
