@@ -11,6 +11,8 @@ public class Payment implements Serializable {
 	private BigDecimal amount;
 	private Integer customerId;
 	private Integer carId;
+
+	public Payment() {}
 	
 	public Payment(BigDecimal amount, Integer customerId, Integer carId) {
 		// Generate a random id
