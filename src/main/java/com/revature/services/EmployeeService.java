@@ -6,9 +6,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.revature.beans.Employee;
+import com.revature.dao.EmployeeDAOImpl;
 
 public class EmployeeService {
 	private static EmployeeService instance;
@@ -25,35 +27,6 @@ public class EmployeeService {
 		return instance;
 	}
 	
-	// Load employees
-	@SuppressWarnings("unchecked")
-	public void loadEmployees() {
-		try {
-			FileInputStream fis = new FileInputStream("Employees.ser");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			employees = (ArrayList<Employee>)ois.readObject();
-			ois.close();
-			fis.close();
-		} catch (FileNotFoundException e) {
-			// e.printStackTrace();
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	// Save employees
-	public void saveEmployees() {
-		try {
-			FileOutputStream fos = new FileOutputStream("Employees.ser");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(employees);
-			oos.close();
-			fos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	// Set current employee
 	public void setCurrentEmployee(Employee e) {
 		currentEmployee = e;
@@ -63,24 +36,29 @@ public class EmployeeService {
 	public Employee getCurrentEmployee() {
 		return currentEmployee;
 	}
-	
+
 	// Get all employees
 	public ArrayList<Employee> getEmployees() {
 		return employees;
 	}
 	
 	// Save employee to employees
-	public void saveEmployee(Employee c) {
-		employees.add(c);
-		saveEmployees();
+	public void saveEmployee(Employee e) {
+		EmployeeDAOImpl edi = new EmployeeDAOImpl();
+		try {
+			edi.saveEmployee(e);
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
 	}
 	
 	// Get employee from employees
 	public Employee getEmployee(String username) {
-		for (Employee e : employees) {
-			if (e.getUsername().equals(username)) {
-				return e;
-			}
+		EmployeeDAOImpl edi = new EmployeeDAOImpl();
+		try {
+			return edi.getEmployee(username);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return null;
 	}

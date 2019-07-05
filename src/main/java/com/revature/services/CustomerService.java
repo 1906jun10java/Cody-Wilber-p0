@@ -27,35 +27,6 @@ public class CustomerService {
 		return instance;
 	}
 	
-	// Load customers
-	@SuppressWarnings("unchecked")
-	public void loadCustomers() {
-		try {
-			FileInputStream fis = new FileInputStream("Customers.ser");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			customers = (ArrayList<Customer>)ois.readObject();
-			ois.close();
-			fis.close();
-		} catch (FileNotFoundException e) {
-			// e.printStackTrace();
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	// Save customers
-	public void saveCustomers() {
-		try {
-			FileOutputStream fos = new FileOutputStream("Customers.ser");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(customers);
-			oos.close();
-			fos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	// Set current customer
 	public void setCurrentCustomer(Customer c) {
 		currentCustomer = c;
@@ -73,8 +44,6 @@ public class CustomerService {
 	
 	// Save customer to customers
 	public void saveCustomer(Customer c) {
-		/*customers.add(c);
-		saveCustomers();*/
 		CustomerDAOImpl cdi = new CustomerDAOImpl();
 		try {
 			cdi.saveCustomer(c);
@@ -85,20 +54,12 @@ public class CustomerService {
 	
 	// Get customer from customers
 	public Customer getCustomer(String username) {
-		/*for (Customer c : customers) {
-			if (c.getUsername().equals(username)) {
-				return c;
-			}
-		}
-		return null;*/
 		CustomerDAOImpl cdi = new CustomerDAOImpl();
 		try {
-			Customer c = cdi.getCustomer(username);
-			return c;
+			return cdi.getCustomer(username);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return null;
 	}
 }
