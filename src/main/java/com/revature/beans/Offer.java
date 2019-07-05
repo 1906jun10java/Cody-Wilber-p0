@@ -12,6 +12,8 @@ public class Offer implements Serializable {
 	private Integer customerId;
 	private BigDecimal amount;
 	private String status;
+
+	public Offer() {}
 	
 	public Offer(Integer carId, Integer customerId, BigDecimal amount) {
 		// Generate a random id
