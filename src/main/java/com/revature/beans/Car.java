@@ -15,6 +15,8 @@ public class Car implements Serializable {
 	private BigDecimal price;
 	private BigDecimal balance;
 	private Integer ownerId;
+
+	public Car() {}
 	
 	public Car(Integer year, String make, String model, Integer mileage,
 	BigDecimal price) {
