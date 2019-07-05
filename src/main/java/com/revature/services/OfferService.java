@@ -1,21 +1,16 @@
 package com.revature.services;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.ListIterator;
-import java.util.Scanner;
-
 import com.revature.beans.Offer;
+import com.revature.dao.OfferDAOImpl;
+
+import java.sql.SQLException;
+import java.util.InputMismatchException;
+import java.util.List;
+import java.util.Scanner;
 
 public class OfferService {
 	private static OfferService instance;
-	private static ArrayList<Offer> offers = new ArrayList<Offer>();
+	private static OfferDAOImpl odi = new OfferDAOImpl();
 	private static Scanner sc = new Scanner(System.in);
 	
 	private OfferService() {}
@@ -27,82 +22,44 @@ public class OfferService {
 		}
 		return instance;
 	}
-	
-	// Load offers
-	@SuppressWarnings("unchecked")
-	public void loadOffers() {
-		try {
-			FileInputStream fis = new FileInputStream("Offers.ser");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			offers = (ArrayList<Offer>)ois.readObject();
-			ois.close();
-			fis.close();
-		} catch (FileNotFoundException e) {
-			// e.printStackTrace();
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	// Save offers
-	public void saveOffers() {
-		try {
-			FileOutputStream fos = new FileOutputStream("Offers.ser");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(offers);
-			oos.close();
-			fos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	// Get all offers
-	public ArrayList<Offer> getOffers() {
-		return offers;
-	}
-	
-	// Save offer to offers
-	public void saveOffer(Offer o) {
-		offers.add(o);
-		saveOffers();
-	}
-	
-	// Update offer
-	public void updateOffer(Offer o) {
-		ListIterator<Offer> it = offers.listIterator();
-		while (it.hasNext()) {
-			if (it.next().getId().equals(o.getId())) {
-				it.remove();
-				it.add(o);
-				saveOffers();
-				break;
-			}
-		}
-	}
-	
-	// Get offer from offers
+
+	// Get offer
 	public Offer getOffer(Integer id) {
-		for (Offer o : offers) {
-			if (o.getId().equals(id)) {
-				return o;
-			}
+		try {
+			return odi.getOffer(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	// Get offers by car id
-	public ArrayList<Offer> getOffersByCar(Integer carId) {
-		ArrayList<Offer> offers = new ArrayList<Offer>();
-		
-		ListIterator<Offer> it = offers.listIterator();
-		while (it.hasNext()) {
-			if (it.next().getCarId().equals(carId)) {
-				offers.add(it.next());
-			}
+	// Save offer to offers
+	public void saveOffer(Offer o) {
+		try {
+			odi.saveOffer(o);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		
-		return offers;
+	}
+	
+	// Update offer
+	public void updateOffer(Offer o) {
+		try {
+			odi.updateOffer(o);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// Get offers by car id
+	public List<Offer> getOffersByCar(Integer carId) {
+		try {
+			return odi.getOffersByCar(carId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 	
 	// Accept offer

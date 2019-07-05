@@ -1,12 +1,12 @@
 package com.revature.views.offer;
 
-import java.math.RoundingMode;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
 import com.revature.beans.Offer;
 import com.revature.services.CarService;
 import com.revature.services.OfferService;
+
+import java.math.RoundingMode;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class OfferListView {
 	private static OfferService os = OfferService.getInstance();
@@ -19,15 +19,13 @@ public class OfferListView {
 		Integer carId = getCarIdInput();
 		System.out.println();
 		System.out.println("Offers for " + carId + ":\n");
-		for (Offer o : os.getOffers()) {
-			if (o.getCarId().equals(carId)) {
-				System.out.println("Offer:\t\t" + o.getId());
-				System.out.println("Customer:\t" + o.getCustomerId());
-				System.out.println("Amount:\t\t$" +
-					o.getAmount().setScale(2, RoundingMode.HALF_UP));
-				System.out.println("Status:\t\t" + o.getStatus());
-				System.out.println();
-			}
+		for (Offer o : os.getOffersByCar(carId)) {
+			System.out.println("Offer:\t\t" + o.getId());
+			System.out.println("Customer:\t" + o.getCustomerId());
+			System.out.println("Amount:\t\t$" +
+				o.getAmount().setScale(2, RoundingMode.HALF_UP));
+			System.out.println("Status:\t\t" + o.getStatus());
+			System.out.println();
 		}
 	}
 	

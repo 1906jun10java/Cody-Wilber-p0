@@ -1,10 +1,11 @@
 package com.revature.views.offer;
 
-import java.util.ArrayList;
 import com.revature.beans.Car;
 import com.revature.beans.Offer;
 import com.revature.services.CarService;
 import com.revature.services.OfferService;
+
+import java.util.List;
 
 public class OfferAcceptAction {
 	private static OfferService os = OfferService.getInstance();
@@ -15,7 +16,7 @@ public class OfferAcceptAction {
 	public void run() {
 		Integer offerId = os.getOfferIdInput();
 		Offer offer = os.getOffer(offerId);
-		
+
 		os.acceptOffer(offerId);
 		
 		// Assign car to customer
@@ -25,7 +26,7 @@ public class OfferAcceptAction {
 		c.setBalance(offer.getAmount());
 		
 		// Reject other offers for same car
-		ArrayList<Offer> carOffers = os.getOffersByCar(c.getId());
+		List<Offer> carOffers = os.getOffersByCar(c.getId());
 		for (Offer o : carOffers) {
 			if (o.getId().equals(offerId)) {
 				os.rejectOffer(o.getId());
