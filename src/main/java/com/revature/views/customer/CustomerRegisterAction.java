@@ -85,14 +85,13 @@ public class CustomerRegisterAction {
 			System.out.println("Username must be at least 6 characters.");
 			return false;
 		}
-		
-		for (Customer c : cs.getCustomers()) {
-			if (c.getUsername().equals(un)) {
-				System.out.println("Username is taken.");
-				return false;
-			}
+
+		Customer c = cs.getCustomer(un);
+		if (c != null) {
+			System.out.println("Username is taken.");
+			return false;
 		}
-		
+
 		return true;
 	}
 	
