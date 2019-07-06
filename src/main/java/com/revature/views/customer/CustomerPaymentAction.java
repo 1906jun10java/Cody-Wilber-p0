@@ -18,7 +18,7 @@ public class CustomerPaymentAction {
     private static CarService cs = CarService.getInstance();
     private static PaymentService ps = PaymentService.getInstance();
     private static Scanner sc = new Scanner(System.in);
-    final static Logger logger = LogManager.getLogger(CustomerPaymentAction.class);
+    private final static Logger logger = LogManager.getLogger(CustomerPaymentAction.class);
 
     CustomerPaymentAction() {}
 

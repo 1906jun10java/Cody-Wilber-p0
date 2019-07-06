@@ -12,7 +12,7 @@ import java.util.List;
 public class OfferAcceptAction {
 	private static OfferService os = OfferService.getInstance();
 	private static CarService cs = CarService.getInstance();
-	final static Logger logger = LogManager.getLogger(OfferAcceptAction.class);
+	private final static Logger logger = LogManager.getLogger(OfferAcceptAction.class);
 	
 	public OfferAcceptAction() {}
 	

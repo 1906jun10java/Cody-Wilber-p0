@@ -17,7 +17,7 @@ public class OfferCreateAction {
 	private static CarService cs = CarService.getInstance();
 	private static CustomerService cus = CustomerService.getInstance();
 	private static Scanner sc = new Scanner(System.in);
-	final static Logger logger = LogManager.getLogger(OfferCreateAction.class);
+	private final static Logger logger = LogManager.getLogger(OfferCreateAction.class);
 	
 	public OfferCreateAction() {}
 	

@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class EmployeeRegisterAction {
 	private static EmployeeService es = EmployeeService.getInstance();
 	private Scanner sc = new Scanner(System.in);
-	final static Logger logger = LogManager.getLogger(EmployeeRegisterAction.class);
+	private final static Logger logger = LogManager.getLogger(EmployeeRegisterAction.class);
 	
 	public EmployeeRegisterAction() {}
 	

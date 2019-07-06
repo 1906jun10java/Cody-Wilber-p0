@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class CarAddAction {
 	private static CarService cs = CarService.getInstance();
 	private static Scanner sc = new Scanner(System.in);
-	final static Logger logger = LogManager.getLogger(CarAddAction.class);
+	private final static Logger logger = LogManager.getLogger(CarAddAction.class);
 	
 	CarAddAction() {}
 	

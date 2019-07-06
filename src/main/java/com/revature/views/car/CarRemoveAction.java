@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 
 public class CarRemoveAction {
 	private static CarService cs = CarService.getInstance();
-	final static Logger logger = LogManager.getLogger(CarRemoveAction.class);
+	private final static Logger logger = LogManager.getLogger(CarRemoveAction.class);
 	
 	CarRemoveAction() {}
 	

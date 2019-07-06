@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class EmployeeLoginAction {
 	private static EmployeeService es = EmployeeService.getInstance();
 	private static Scanner sc = new Scanner(System.in);
-	final static Logger logger = LogManager.getLogger(EmployeeLoginAction.class);
+	private final static Logger logger = LogManager.getLogger(EmployeeLoginAction.class);
 	
 	public EmployeeLoginAction() {}
 	

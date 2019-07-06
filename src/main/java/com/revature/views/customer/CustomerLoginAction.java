@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class CustomerLoginAction {
 	private static CustomerService cs = CustomerService.getInstance();
 	private static Scanner sc = new Scanner(System.in);
-	final static Logger logger = LogManager.getLogger(CustomerLoginAction.class);
+	private final static Logger logger = LogManager.getLogger(CustomerLoginAction.class);
 	
 	public CustomerLoginAction() {}
 	

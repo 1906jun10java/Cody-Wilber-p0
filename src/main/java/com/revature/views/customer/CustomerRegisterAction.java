@@ -10,7 +10,7 @@ import java.util.Scanner;
 public class CustomerRegisterAction {
 	private static CustomerService cs = CustomerService.getInstance();
 	private static Scanner sc = new Scanner(System.in);
-	final static Logger logger = LogManager.getLogger(CustomerRegisterAction.class);
+	private final static Logger logger = LogManager.getLogger(CustomerRegisterAction.class);
 	
 	public CustomerRegisterAction() {}
 	

@@ -6,7 +6,7 @@ import org.apache.logging.log4j.Logger;
 
 public class OfferRejectAction {
 	private static OfferService os = OfferService.getInstance();
-	final static Logger logger = LogManager.getLogger(OfferRejectAction.class);
+	private final static Logger logger = LogManager.getLogger(OfferRejectAction.class);
 	
 	public OfferRejectAction() {}
 	
