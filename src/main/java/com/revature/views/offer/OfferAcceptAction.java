@@ -14,22 +14,22 @@ public class OfferAcceptAction {
 	public OfferAcceptAction() {}
 	
 	public void run() {
-		Integer offerId = os.getOfferIdInput();
+		int offerId = os.getOfferIdInput();
 		Offer offer = os.getOffer(offerId);
-
-		os.acceptOffer(offerId);
+		os.acceptOffer(offer);
 		
 		// Assign car to customer
-		Car c = cs.getCar(os.getOffer(offerId).getCarId());
+		Car c = cs.getCar(offer.getCarId());
 		c.setOwnerId(os.getOffer(offerId).getCustomerId());
 		c.setPrice(offer.getAmount());
 		c.setBalance(offer.getAmount());
+		cs.updateCar(c);
 		
 		// Reject other offers for same car
 		List<Offer> carOffers = os.getOffersByCar(c.getId());
 		for (Offer o : carOffers) {
 			if (o.getId().equals(offerId)) {
-				os.rejectOffer(o.getId());
+				os.rejectOffer(offer);
 			}
 		}
 		

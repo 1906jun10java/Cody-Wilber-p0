@@ -5,7 +5,6 @@ import com.revature.beans.Payment;
 import com.revature.services.CarService;
 import com.revature.services.CustomerService;
 import com.revature.services.PaymentService;
-import org.apache.logging.log4j.core.config.plugins.convert.TypeConverters;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -21,9 +20,8 @@ public class CustomerPaymentAction {
     CustomerPaymentAction() {}
 
     public void run() {
-        Integer carId = cs.getCarIdInput();
+        int carId = cs.getCarIdInput();
         Car c = cs.getCar(carId);
-        System.out.println(c.getId() + " " + carId);
         BigDecimal monthlyPayment = ps.calcMonthlyPayment(c);
 
         System.out.println("\nYour monthly payment is $" + monthlyPayment);
@@ -51,7 +49,7 @@ public class CustomerPaymentAction {
         case 1:
             Integer customerId = cus.getCurrentCustomer().getId();
             Payment p = new Payment(monthlyPayment, customerId, c.getId());
-            ps.addPayment(p);
+            ps.savePayment(p);
             ps.updateCarBalance(c);
             System.out.println("\nThank you for your payment.");
             System.out.println("Your new balance is $" +

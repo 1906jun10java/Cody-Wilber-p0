@@ -1,10 +1,13 @@
 package com.revature.dao;
 
+import com.revature.beans.Car;
 import com.revature.beans.Payment;
 import com.revature.services.ConnectionService;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PaymentDAOImpl implements PaymentDAO {
     private static ConnectionService cs = ConnectionService.getInstance();
@@ -39,5 +42,28 @@ public class PaymentDAOImpl implements PaymentDAO {
         }
 
         return p;
+    }
+
+    @Override
+    public List<Payment> getCarPayments(Car c) throws SQLException {
+        String sql = "SELECT * FROM PAYMENT WHERE CAR_ID = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setInt(1, c.getId());
+
+        ResultSet rs = stmt.executeQuery();
+        List<Payment> payments = new ArrayList<>();
+        if (!rs.isBeforeFirst()) {
+            return null;
+        }
+        while (rs.next()) {
+            Payment p = new Payment();
+            p.setId(rs.getInt("PAYMENT_ID"));
+            p.setAmount(BigDecimal.valueOf(rs.getDouble("PAYMENT_AMOUNT")));
+            p.setCarId(rs.getInt("CAR_ID"));
+            p.setCustomerId(rs.getInt("CUSTOMER_ID"));
+            payments.add(p);
+        }
+
+        return payments;
     }
 }

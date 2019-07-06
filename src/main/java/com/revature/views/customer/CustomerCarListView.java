@@ -19,6 +19,10 @@ public class CustomerCarListView {
 		
 		List<Car> cars = cs.getCustomerCars(customer.getId());
 		System.out.println();
+		if (cars == null) {
+			System.out.println("\nNo cars to display.");
+			return;
+		}
 		for (Car c : cars) {
 			System.out.println("ID:\t\t\t" + c.getId());
 			System.out.println("Year:\t\t" + c.getYear());

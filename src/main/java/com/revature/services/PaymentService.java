@@ -1,24 +1,17 @@
 package com.revature.services;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.ListIterator;
-import java.util.Scanner;
-
 import com.revature.beans.Car;
 import com.revature.beans.Payment;
+import com.revature.dao.PaymentDAOImpl;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.sql.SQLException;
+import java.util.List;
 
 public class PaymentService {
 	private static PaymentService instance;
-	private static ArrayList<Payment> payments = new ArrayList<Payment>();
-	private static Scanner sc = new Scanner(System.in);
+	private static PaymentDAOImpl pdi = new PaymentDAOImpl();
 	private static CarService cs = CarService.getInstance();
 	private final BigDecimal TERM12 = BigDecimal.valueOf(12);
 	private final BigDecimal TERM24 = BigDecimal.valueOf(24);
@@ -36,52 +29,24 @@ public class PaymentService {
 		}
 		return instance;
 	}
-	
-	// Load payments
-	@SuppressWarnings("unchecked")
-	public void loadPayments() {
-		try {
-			FileInputStream fis = new FileInputStream("Payments.ser");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			payments = (ArrayList<Payment>)ois.readObject();
-			ois.close();
-			fis.close();
-		} catch (FileNotFoundException e) {
-			// e.printStackTrace();
-		} catch (ClassNotFoundException | IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	// Save payments
-	public void savePayments() {
-		try {
-			FileOutputStream fos = new FileOutputStream("Payments.ser");
-			ObjectOutputStream oos = new ObjectOutputStream(fos);
-			oos.writeObject(payments);
-			oos.close();
-			fos.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	// Add car payment
-	public void addPayment(Payment p) {
-		payments.add(p);
-		savePayments();
+	public void savePayment(Payment p) {
+		try {
+			pdi.savePayment(p);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 
 	// Get car payments
-	public ArrayList<Payment> getPayments(Car c) {
-		ArrayList<Payment> carPayments = new ArrayList<Payment>();
-		for (Payment p : payments) {
-			if (p.getCarId().equals(c.getId())) {
-				carPayments.add(p);
-			}
+	public List<Payment> getCarPayments(Car c) {
+		try {
+			return pdi.getCarPayments(c);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-
-		return carPayments;
+		return null;
 	}
 
 	// Calculate monthly payments depending on car price
@@ -104,8 +69,7 @@ public class PaymentService {
 
 	// Update balance of car
 	public void updateCarBalance(Car c) {
-		ArrayList<Payment> carPayments = getPayments(c);
-		BigDecimal monthlyPayment = calcMonthlyPayment(c);
+		List<Payment> carPayments = getCarPayments(c);
 		BigDecimal carBalance = c.getPrice();
 
 		for (Payment p : carPayments) {
@@ -123,6 +87,6 @@ public class PaymentService {
 		Car c = cs.getCar(p.getCarId());
 		System.out.println("\nPayment " + p.getId() + ":");
 		System.out.println(c.getYear() + " " + c.getMake() + " " + c.getModel());
-		System.out.println("Paid $" + p.getAmount());
+		System.out.println("Paid $" + p.getAmount().setScale(2, RoundingMode.HALF_UP));
 	}
 }

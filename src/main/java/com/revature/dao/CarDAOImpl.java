@@ -22,7 +22,12 @@ public class CarDAOImpl implements CarDAO {
         stmt.setInt(4, c.getMileage());
         stmt.setDouble(5, c.getPrice().doubleValue());
         stmt.setDouble(6, c.getBalance().doubleValue());
-        stmt.setInt(7, c.getOwnerId());
+        if (c.getOwnerId() == null) {
+            stmt.setNull(7, Types.INTEGER);
+        } else {
+            stmt.setInt(7, c.getOwnerId());
+        }
+
         stmt.execute();
     }
 
@@ -115,7 +120,12 @@ public class CarDAOImpl implements CarDAO {
         stmt.setInt(5, c.getMileage());
         stmt.setDouble(6, c.getPrice().doubleValue());
         stmt.setDouble(7, c.getBalance().doubleValue());
-        stmt.setInt(8, c.getOwnerId());
+        System.out.println(c.getOwnerId());
+        if (c.getOwnerId() == null) {
+            stmt.setNull(8, Types.INTEGER);
+        } else {
+            stmt.setInt(8, c.getOwnerId());
+        }
         stmt.execute();
     }
 

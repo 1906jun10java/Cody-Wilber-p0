@@ -37,7 +37,7 @@ public class OfferListView {
 			System.out.print(">>> ");
 			try {
 				id = sc.nextInt();
-				if (cs.getCar(id) == null || cs.getCar(id).getOwnerId() != null) {
+				if (cs.getCar(id) == null || cs.getCar(id).getOwnerId() != 0) {
 					throw new Exception();
 				}
 				sc.nextLine();

@@ -1,13 +1,14 @@
 package com.revature.views.offer;
 
-import java.math.BigDecimal;
-import java.util.InputMismatchException;
-import java.util.Scanner;
-
+import com.revature.beans.Car;
 import com.revature.beans.Offer;
 import com.revature.services.CarService;
 import com.revature.services.CustomerService;
 import com.revature.services.OfferService;
+
+import java.math.BigDecimal;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class OfferCreateAction {
 	private static OfferService os = OfferService.getInstance();
@@ -28,13 +29,15 @@ public class OfferCreateAction {
 	
 	// Get car id from user
 	private Integer getCarIdInput() {
-		Integer id = 0;
+		int id = 0;
 		while (true) {
 			System.out.println("Enter vehicle ID number:");
 			System.out.print(">>> ");
 			try {
 				id = sc.nextInt();
-				if (cs.getCar(id) == null || cs.getCar(id).getOwnerId() != null) {
+				Car c = cs.getCar(id);
+				System.out.println(c.getOwnerId());
+				if (cs.getCar(id) == null || cs.getCar(id).getOwnerId() != 0) {
 					throw new Exception();
 				}
 				sc.nextLine();

@@ -8,8 +8,8 @@ public class OfferRejectAction {
 	public OfferRejectAction() {}
 	
 	public void run() {
-		Integer offerId = os.getOfferIdInput();
-		os.rejectOffer(offerId);
+		int offerId = os.getOfferIdInput();
+		os.rejectOffer(os.getOffer(offerId));
 		
 		System.out.println("\nOffer rejected.");
 	}

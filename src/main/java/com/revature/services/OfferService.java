@@ -43,7 +43,7 @@ public class OfferService {
 	}
 	
 	// Update offer
-	public void updateOffer(Offer o) {
+	private void updateOffer(Offer o) {
 		try {
 			odi.updateOffer(o);
 		} catch (SQLException e) {
@@ -63,15 +63,13 @@ public class OfferService {
 	}
 	
 	// Accept offer
-	public void acceptOffer(Integer id) {
-		Offer o = getOffer(id);
+	public void acceptOffer(Offer o) {
 		o.setStatus("Accepted");
 		updateOffer(o);
 	}
 	
 	// Reject offer
-	public void rejectOffer(Integer id) {
-		Offer o = getOffer(id);
+	public void rejectOffer(Offer o) {
 		o.setStatus("Rejected");
 		updateOffer(o);
 	}
