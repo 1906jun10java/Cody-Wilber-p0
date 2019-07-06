@@ -1,11 +1,11 @@
 package com.revature.views.customer;
 
- import java.util.ArrayList;
-
 import com.revature.views.Menu;
 import com.revature.views.car.CarListView;
 import com.revature.views.offer.OfferCreateAction;
 import com.revature.views.user.UserHomeMenu;
+
+import java.util.ArrayList;
 
  public class CustomerHomeMenu extends Menu {
 	CustomerHomeMenu() {
@@ -51,4 +51,3 @@ import com.revature.views.user.UserHomeMenu;
 		}
 	}
 }
-

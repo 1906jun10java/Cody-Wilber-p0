@@ -1,22 +1,14 @@
 package com.revature.services;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 import com.revature.beans.Customer;
 import com.revature.dao.CustomerDAOImpl;
+
+import java.sql.SQLException;
 
 public class CustomerService {
 	private static CustomerService instance;
 	private static Customer currentCustomer;
-	private static ArrayList<Customer> customers = new ArrayList<Customer>();
-	
+
 	private CustomerService() {}
 	
 	// Return singleton instance
@@ -35,11 +27,6 @@ public class CustomerService {
 	// Get current customer
 	public Customer getCurrentCustomer() {
 		return currentCustomer;
-	}
-	
-	// Get all customers
-	public ArrayList<Customer> getCustomers() {
-		return customers;
 	}
 	
 	// Save customer to customers
