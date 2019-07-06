@@ -1,13 +1,16 @@
 package com.revature.views.employee;
 
-import java.util.Scanner;
-
 import com.revature.beans.Employee;
 import com.revature.services.EmployeeService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Scanner;
 
 public class EmployeeRegisterAction {
 	private static EmployeeService es = EmployeeService.getInstance();
 	private Scanner sc = new Scanner(System.in);
+	final static Logger logger = LogManager.getLogger(EmployeeRegisterAction.class);
 	
 	public EmployeeRegisterAction() {}
 	
@@ -26,6 +29,7 @@ public class EmployeeRegisterAction {
 		// Create employee and save
 		Employee e = new Employee(firstName, lastName, username, password);
 		es.saveEmployee(e);
+		logger.info("NEW EMPLOYEE REGISTERED");
 		
 		// Redirect to login
 		EmployeeLoginAction cla = new EmployeeLoginAction();

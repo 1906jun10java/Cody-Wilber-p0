@@ -4,12 +4,15 @@ import com.revature.beans.Car;
 import com.revature.beans.Offer;
 import com.revature.services.CarService;
 import com.revature.services.OfferService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class OfferAcceptAction {
 	private static OfferService os = OfferService.getInstance();
 	private static CarService cs = CarService.getInstance();
+	final static Logger logger = LogManager.getLogger(OfferAcceptAction.class);
 	
 	public OfferAcceptAction() {}
 	
@@ -34,5 +37,6 @@ public class OfferAcceptAction {
 		}
 		
 		System.out.println("\nOffer accepted.");
+		logger.info("OFFER " + offer.getId() + " ACCEPTED");
 	}
 }

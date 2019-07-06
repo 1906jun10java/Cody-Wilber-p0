@@ -121,7 +121,7 @@ public class CarDAOImpl implements CarDAO {
         stmt.setDouble(6, c.getPrice().doubleValue());
         stmt.setDouble(7, c.getBalance().doubleValue());
         System.out.println(c.getOwnerId());
-        if (c.getOwnerId() == null) {
+        if (c.getOwnerId() == 0 || c.getOwnerId() == null) {
             stmt.setNull(8, Types.INTEGER);
         } else {
             stmt.setInt(8, c.getOwnerId());

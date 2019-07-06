@@ -1,15 +1,18 @@
 package com.revature.views.car;
 
+import com.revature.beans.Car;
+import com.revature.services.CarService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.math.BigDecimal;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import com.revature.beans.Car;
-import com.revature.services.CarService;
-
 public class CarAddAction {
 	private static CarService cs = CarService.getInstance();
 	private static Scanner sc = new Scanner(System.in);
+	final static Logger logger = LogManager.getLogger(CarAddAction.class);
 	
 	CarAddAction() {}
 	
@@ -23,6 +26,7 @@ public class CarAddAction {
 		Car c = new Car(year, make, model, mileage, price);
 		cs.saveCar(c);
 		System.out.println("\nCar added.");
+		logger.info("CAR ADDED");
 	}
 	
 	// Get vehicle year

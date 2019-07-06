@@ -1,17 +1,20 @@
 package com.revature.views.car;
 
+import com.revature.beans.Car;
+import com.revature.services.CarService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.math.BigDecimal;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import com.revature.beans.Car;
-import com.revature.services.CarService;
-
 public class CarEditAction {
 	private static CarService cs = CarService.getInstance();
 	private static Scanner sc = new Scanner(System.in);
+	final static Logger logger = LogManager.getLogger(CarEditAction.class);
 	
-	public CarEditAction() {}
+	CarEditAction() {}
 	
 	public void run() {
 		Integer carId = cs.getCarIdInput();
@@ -58,11 +61,12 @@ public class CarEditAction {
 		
 		cs.updateCar(c);
 		System.out.println("\nCar updated.");
+		logger.info("CAR " + carId + " UPDATED");
 	}
 	
 	// Get vehicle year
 	private Integer getYearInput() {
-		int year = 0;
+		int year;
 		while (true) {
 			System.out.println("Enter vehicle's year:");
 			System.out.print(">>> ");
@@ -81,7 +85,7 @@ public class CarEditAction {
 	
 	// Get vehicle make from user
 	private String getMakeInput() {
-		String make = "";
+		String make;
 		System.out.println("Enter vehicle's make:");
 		System.out.print(">>> ");
 		make = sc.nextLine();
@@ -91,7 +95,7 @@ public class CarEditAction {
 	
 	// Get vehicle model from user
 	private String getModelInput() {
-		String model = "";
+		String model;
 		System.out.println("Enter vehicle's model:");
 		System.out.print(">>> ");
 		model = sc.nextLine();
@@ -101,7 +105,7 @@ public class CarEditAction {
 	
 	// Get vehicle mileage from user
 	private Integer getMileageInput() {
-		int mileage = 0;
+		int mileage;
 		while (true) {
 			System.out.println("Enter vehicle's mileage:");
 			System.out.print(">>> ");

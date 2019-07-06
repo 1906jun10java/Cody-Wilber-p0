@@ -5,6 +5,8 @@ import com.revature.beans.Offer;
 import com.revature.services.CarService;
 import com.revature.services.CustomerService;
 import com.revature.services.OfferService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.InputMismatchException;
@@ -15,6 +17,7 @@ public class OfferCreateAction {
 	private static CarService cs = CarService.getInstance();
 	private static CustomerService cus = CustomerService.getInstance();
 	private static Scanner sc = new Scanner(System.in);
+	final static Logger logger = LogManager.getLogger(OfferCreateAction.class);
 	
 	public OfferCreateAction() {}
 	
@@ -25,6 +28,7 @@ public class OfferCreateAction {
 		Offer o = new Offer(carId, cus.getCurrentCustomer().getId(), offer);
 		os.saveOffer(o);
 		System.out.println("\nOffer received.");
+		logger.info("NEW OFFER FOR CAR + " + carId);
 	}
 	
 	// Get car id from user

@@ -1,14 +1,17 @@
 package com.revature.views.employee;
 
-import java.util.Scanner;
-
 import com.revature.beans.Employee;
 import com.revature.services.EmployeeService;
 import com.revature.views.user.UserHomeMenu;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Scanner;
 
 public class EmployeeLoginAction {
 	private static EmployeeService es = EmployeeService.getInstance();
 	private static Scanner sc = new Scanner(System.in);
+	final static Logger logger = LogManager.getLogger(EmployeeLoginAction.class);
 	
 	public EmployeeLoginAction() {}
 	
@@ -30,6 +33,8 @@ public class EmployeeLoginAction {
 			if (es.getCurrentEmployee() != null) {
 				notValidLogin = false;
 				System.out.println("\nCredentials accepted. Logging in...");
+				logger.info("EMPLOYEE " + es.getCurrentEmployee().getId() +
+						" LOGGED IN");
 				
 				// Redirect to customer home menu
 				EmployeeHomeMenu ehm = new EmployeeHomeMenu();

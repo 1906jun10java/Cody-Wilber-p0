@@ -1,13 +1,16 @@
 package com.revature.views.customer;
 
-import java.util.Scanner;
-
 import com.revature.beans.Customer;
 import com.revature.services.CustomerService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Scanner;
 
 public class CustomerRegisterAction {
 	private static CustomerService cs = CustomerService.getInstance();
 	private static Scanner sc = new Scanner(System.in);
+	final static Logger logger = LogManager.getLogger(CustomerRegisterAction.class);
 	
 	public CustomerRegisterAction() {}
 	
@@ -26,6 +29,7 @@ public class CustomerRegisterAction {
 		// Create customer and save
 		Customer c = new Customer(firstName, lastName, username, password);
 		cs.saveCustomer(c);
+		logger.info("NEW CUSTOMER REGISTERED");
 		
 		// Redirect to login
 		CustomerLoginAction cla = new CustomerLoginAction();

@@ -1,14 +1,17 @@
 package com.revature.views.customer;
 
-import java.util.Scanner;
-
 import com.revature.beans.Customer;
 import com.revature.services.CustomerService;
 import com.revature.views.user.UserHomeMenu;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import java.util.Scanner;
 
 public class CustomerLoginAction {
 	private static CustomerService cs = CustomerService.getInstance();
 	private static Scanner sc = new Scanner(System.in);
+	final static Logger logger = LogManager.getLogger(CustomerLoginAction.class);
 	
 	public CustomerLoginAction() {}
 	
@@ -30,6 +33,8 @@ public class CustomerLoginAction {
 			if (cs.getCurrentCustomer() != null) {
 				notValidLogin = false;
 				System.out.println("\nCredentials accepted. Logging in...");
+				logger.info("CUSTOMER " + cs.getCurrentCustomer().getId() +
+						" LOGGED IN.");
 				
 				// Redirect to customer home menu
 				CustomerHomeMenu chm = new CustomerHomeMenu();

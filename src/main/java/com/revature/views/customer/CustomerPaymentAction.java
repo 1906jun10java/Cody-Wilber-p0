@@ -5,6 +5,8 @@ import com.revature.beans.Payment;
 import com.revature.services.CarService;
 import com.revature.services.CustomerService;
 import com.revature.services.PaymentService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -16,6 +18,7 @@ public class CustomerPaymentAction {
     private static CarService cs = CarService.getInstance();
     private static PaymentService ps = PaymentService.getInstance();
     private static Scanner sc = new Scanner(System.in);
+    final static Logger logger = LogManager.getLogger(CustomerPaymentAction.class);
 
     CustomerPaymentAction() {}
 
@@ -54,6 +57,7 @@ public class CustomerPaymentAction {
             System.out.println("\nThank you for your payment.");
             System.out.println("Your new balance is $" +
                 c.getBalance().setScale(2, RoundingMode.HALF_UP));
+            logger.info("NEW PAYMENT FROM CUSTOMER " + customerId);
             break;
         default:
             System.out.println("\nInvalid option.");
