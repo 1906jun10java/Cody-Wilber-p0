@@ -1,22 +1,14 @@
 package com.revature.services;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
 import com.revature.beans.Employee;
 import com.revature.dao.EmployeeDAOImpl;
+
+import java.sql.SQLException;
 
 public class EmployeeService {
 	private static EmployeeService instance;
 	private static Employee currentEmployee;
-	private static ArrayList<Employee> employees = new ArrayList<Employee>();
-	
+
 	private EmployeeService() {}
 	
 	// Return singleton instance
@@ -35,11 +27,6 @@ public class EmployeeService {
 	// Get current employee
 	public Employee getCurrentEmployee() {
 		return currentEmployee;
-	}
-
-	// Get all employees
-	public ArrayList<Employee> getEmployees() {
-		return employees;
 	}
 	
 	// Save employee to employees

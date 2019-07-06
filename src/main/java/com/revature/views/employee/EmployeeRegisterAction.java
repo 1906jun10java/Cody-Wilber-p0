@@ -85,12 +85,11 @@ public class EmployeeRegisterAction {
 			System.out.println("Username must be at least 6 characters.");
 			return false;
 		}
-		
-		for (Employee e : es.getEmployees()) {
-			if (e.getUsername().equals(un)) {
-				System.out.println("Username is taken.");
-				return false;
-			}
+
+		Employee e = es.getEmployee(un);
+		if (e != null) {
+			System.out.println("Username is taken.");
+			return false;
 		}
 		
 		return true;
