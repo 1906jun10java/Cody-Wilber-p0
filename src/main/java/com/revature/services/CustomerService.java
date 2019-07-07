@@ -8,6 +8,7 @@ import java.sql.SQLException;
 public class CustomerService {
 	private static CustomerService instance;
 	private static Customer currentCustomer;
+	private static CustomerDAOImpl cdi = new CustomerDAOImpl();
 
 	private CustomerService() {}
 	
@@ -29,9 +30,8 @@ public class CustomerService {
 		return currentCustomer;
 	}
 	
-	// Save customer to customers
+	// Save customer
 	public void saveCustomer(Customer c) {
-		CustomerDAOImpl cdi = new CustomerDAOImpl();
 		try {
 			cdi.saveCustomer(c);
 		} catch (SQLException e) {
@@ -39,14 +39,22 @@ public class CustomerService {
 		}
 	}
 	
-	// Get customer from customers
+	// Get customer
 	public Customer getCustomer(String username) {
-		CustomerDAOImpl cdi = new CustomerDAOImpl();
 		try {
 			return cdi.getCustomer(username);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	// Delete customer
+	public void deleteCustomer(String username) {
+		try {
+			cdi.deleteCustomer(username);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 }

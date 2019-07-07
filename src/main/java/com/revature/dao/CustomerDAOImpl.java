@@ -41,4 +41,12 @@ public class CustomerDAOImpl implements CustomerDAO {
 
         return c;
     }
+
+    @Override
+    public void deleteCustomer(String username) throws SQLException {
+        String sql = "DELETE FROM CUSTOMER WHERE CUSTOMER_USERNAME = ?";
+        PreparedStatement stmt = connection.prepareStatement(sql);
+        stmt.setString(1, username);
+        stmt.executeUpdate();
+    }
 }
